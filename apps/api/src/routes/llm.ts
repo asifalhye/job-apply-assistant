@@ -1,7 +1,6 @@
 import type { FastifyInstance } from 'fastify';
-import { eq } from 'drizzle-orm';
 import { getDb, schema } from '@jaa/storage';
-import { LlmRouter, defaultRouterConfig, generateAnswer, createProvider } from '@jaa/llm';
+import { LlmRouter, defaultRouterConfig, generateAnswer } from '@jaa/llm';
 import { profileToSummary } from '@jaa/profile';
 import { retrieveChunks } from '@jaa/rag';
 import { categorizeQuestion, matchProfileField } from '@jaa/form-engine';

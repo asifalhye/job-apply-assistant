@@ -1,14 +1,12 @@
 import type { FastifyInstance } from 'fastify';
-import { eq, like, or } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { getDb, schema, nowIso } from '@jaa/storage';
 
 export async function registerSnippetRoutes(app: FastifyInstance) {
   app.get('/snippets', async (req) => {
     const q = (req.query as { q?: string; category?: string }).q;
     const category = (req.query as { category?: string }).category;
-    let query = getDb().select().from(schema.snippets);
-
-    const all = query.all();
+    const all = getDb().select().from(schema.snippets).all();
     return all.filter((s) => {
       if (category && s.category !== category) return false;
       if (q) {

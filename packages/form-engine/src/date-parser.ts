@@ -34,7 +34,17 @@ export function parseDate(input: string): import('./types.js').ParsedDate {
     };
   }
 
-  // MM/YYYY or MM/DD/YYYY
+  // MM/YYYY
+  const monthYearSlash = lower.match(/^(\d{1,2})\/(\d{4})$/);
+  if (monthYearSlash) {
+    return {
+      raw,
+      month: parseInt(monthYearSlash[1], 10),
+      year: parseInt(monthYearSlash[2], 10),
+    };
+  }
+
+  // MM/DD/YYYY or MM/DD/YY
   const slashMatch = lower.match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/);
   if (slashMatch) {
     const a = parseInt(slashMatch[1], 10);

@@ -26,7 +26,7 @@ export class GreenhouseAdapter implements AtsAdapter {
     const url = page.url();
     const title = await page.title().catch(() => '');
 
-    let company =
+    const company =
       (await page.locator('.company-name, [data-company-name]').first().textContent().catch(() => null))?.trim() ??
       parseCompanyFromTitle(title) ??
       parseCompanyFromUrl(url);
@@ -245,7 +245,7 @@ function parseCompanyFromUrl(url: string): string | undefined {
 }
 
 function parseCompanyFromTitle(title: string): string | undefined {
-  const match = title.match(/\bat\s+(.+?)(?:\s*[\|\-]|$)/i);
+  const match = title.match(/\bat\s+(.+?)(?:\s*[|-]|$)/i);
   return match?.[1]?.trim();
 }
 

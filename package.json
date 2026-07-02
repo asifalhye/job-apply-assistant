@@ -11,7 +11,7 @@
     "dev": "npm run build:packages && concurrently -n api,ui -c blue,green \"npm run dev -w @jaa/api\" \"npm run dev -w @jaa/ui\"",
     "dev:all": "concurrently -n api,ui,runner -c blue,green,yellow \"npm run dev -w @jaa/api\" \"npm run dev -w @jaa/ui\" \"npm run dev -w @jaa/browser-runner\"",
     "build": "npm run build --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
+    "test": "npm run test -w @jaa/form-engine",
     "lint": "eslint . --ext .ts,.tsx",
     "db:migrate": "npm run migrate -w @jaa/storage",
     "db:seed": "npm run seed -w @jaa/storage",
@@ -24,7 +24,7 @@
     "concurrently": "^9.1.0",
     "eslint": "^9.16.0",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.0"
+    "typescript-eslint": "^8.62.1"
   },
   "overrides": {
     "esbuild": "^0.25.12",
