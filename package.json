@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build:packages": "npm run build -w @jaa/storage && npm run build -w @jaa/form-engine && npm run build -w @jaa/llm && npm run build -w @jaa/profile && npm run build -w @jaa/rag && npm run build -w @jaa/ats-adapters",
+    "build:packages": "tsc -b tsconfig.build.json",
     "dev": "npm run build:packages && concurrently -n api,ui -c blue,green \"npm run dev -w @jaa/api\" \"npm run dev -w @jaa/ui\"",
     "dev:all": "concurrently -n api,ui,runner -c blue,green,yellow \"npm run dev -w @jaa/api\" \"npm run dev -w @jaa/ui\" \"npm run dev -w @jaa/browser-runner\"",
     "build": "npm run build --workspaces --if-present",
