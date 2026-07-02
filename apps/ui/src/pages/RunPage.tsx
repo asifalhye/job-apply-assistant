@@ -34,8 +34,10 @@ export function RunPage() {
       .catch(() => setBrowserReady(false));
 
     const interval = setInterval(() => {
-      api.runnerStatus().then(setStatus).catch(() => setStatus({ active: false }));
-    }, 3000);
+      api.runnerStatus()
+        .then(setStatus)
+        .catch(() => setStatus({ active: false }));
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -105,6 +107,10 @@ export function RunPage() {
       <div className="page-header">
         <h2>Run Application</h2>
         <p>Paste a job URL, review proposed values, fill the form. Auto-submit is disabled.</p>
+      </div>
+
+      <div className="alert alert-info">
+        Keep the Playwright Chrome window open while using Run Application. If you close it, click Start again to reopen.
       </div>
 
       <div className="alert alert-warning">

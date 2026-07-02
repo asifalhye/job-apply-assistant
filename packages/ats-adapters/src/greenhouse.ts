@@ -43,7 +43,7 @@ export class GreenhouseAdapter implements AtsAdapter {
 
   async prepareApplicationPage(page: Page): Promise<void> {
     await page.waitForLoadState('domcontentloaded');
-    await page.waitForLoadState('networkidle').catch(() => {});
+    await page.waitForTimeout(1500);
 
     const applyHeading = page.getByText('Apply for this job', { exact: false }).first();
     if (await applyHeading.count()) {
@@ -51,12 +51,10 @@ export class GreenhouseAdapter implements AtsAdapter {
       await page.waitForTimeout(800);
     }
 
-    const applyControls = page.locator(
-      'a[href*="#app"], a[href*="apply"], button:has-text("Apply"), a:has-text("Apply")'
-    );
+    const applyControls = page.locator('a[href*="#app"], a[href*="apply"]');
     if (await applyControls.count()) {
       await applyControls.first().click({ timeout: 3000 }).catch(() => {});
-      await page.waitForTimeout(1200);
+      await page.waitForTimeout(800);
     }
 
     await page
