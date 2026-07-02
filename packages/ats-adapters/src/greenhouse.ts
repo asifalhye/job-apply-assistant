@@ -118,6 +118,7 @@ export class GreenhouseAdapter implements AtsAdapter {
     }
 
     return fields;
+  }
 
   private async extractFromLocator(inputs: Locator, count: number): Promise<ApplicationField[]> {
     const fields: ApplicationField[] = [];

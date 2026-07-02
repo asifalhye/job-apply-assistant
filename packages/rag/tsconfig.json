@@ -2,11 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
-    "paths": {
-      "@jaa/form-engine": ["../form-engine/src/index.ts"],
-      "@jaa/storage": ["../storage/src/index.ts"]
-    }
+    "rootDir": "./src"
   },
   "include": ["src/**/*"],
   "references": [{ "path": "../form-engine" }, { "path": "../llm" }, { "path": "../storage" }]
