@@ -4,6 +4,7 @@ build/
 .data/
 data/*
 !data/.gitkeep
+data/browser-profile/
 apps/api/data/
 **/local.db
 **/local.db-shm

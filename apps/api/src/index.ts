@@ -20,7 +20,8 @@ import { getDataDir } from '@jaa/storage';
 const PORT = parseInt(process.env.API_PORT ?? '3001', 10);
 
 async function main() {
-  mkdirSync(`${getDataDir()}/uploads`, { recursive: true });
+    mkdirSync(`${getDataDir()}/uploads`, { recursive: true });
+    mkdirSync(`${getDataDir()}/browser-profile`, { recursive: true });
   runMigrations();
 
   const app = Fastify({ logger: true });
