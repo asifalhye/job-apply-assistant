@@ -1,0 +1,21 @@
+{
+  "name": "@jaa/browser-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@jaa/ats-adapters": "*",
+    "@jaa/form-engine": "*",
+    "@jaa/storage": "*",
+    "playwright": "^1.49.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,68 @@
+#jaa-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100vh;
+  background: #1a2332;
+  color: #e8edf4;
+  border-left: 1px solid #2d3f56;
+  z-index: 2147483647;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+.jaa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #2d3f56;
+}
+
+.jaa-header button {
+  background: none;
+  border: none;
+  color: #8b9cb3;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.jaa-status {
+  padding: 8px 16px;
+  font-size: 12px;
+}
+
+.jaa-status.connected { color: #3dd68c; }
+.jaa-status.disconnected { color: #f56565; }
+
+#jaa-actions {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#jaa-actions button {
+  padding: 8px 12px;
+  background: #4f9cf9;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#jaa-actions button:hover { background: #3d8ae8; }
+
+#jaa-result {
+  padding: 12px 16px;
+  flex: 1;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #8b9cb3;
+  white-space: pre-wrap;
+}

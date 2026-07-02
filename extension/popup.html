@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body { width: 280px; padding: 16px; font-family: system-ui, sans-serif; background: #1a2332; color: #e8edf4; margin: 0; }
+    h2 { font-size: 14px; margin: 0 0 12px; }
+    #status { font-size: 12px; margin-bottom: 12px; }
+    .connected { color: #3dd68c; }
+    .disconnected { color: #f56565; }
+    button { width: 100%; padding: 8px; background: #4f9cf9; color: #fff; border: none; border-radius: 6px; cursor: pointer; margin-bottom: 8px; }
+    button:hover { background: #3d8ae8; }
+    p { font-size: 11px; color: #8b9cb3; }
+  </style>
+</head>
+<body>
+  <h2>Job Apply Assistant</h2>
+  <div id="status">Checking…</div>
+  <button id="toggle">Open Sidebar</button>
+  <button id="observe">Capture Page Questions</button>
+  <p>Requires local app running at localhost:3001</p>
+  <script src="popup.js"></script>
+</body>
+</html>

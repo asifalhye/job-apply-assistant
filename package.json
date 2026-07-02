@@ -1,0 +1,31 @@
+{
+  "name": "job-apply-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build:packages": "npm run build -w @jaa/storage -w @jaa/form-engine -w @jaa/llm -w @jaa/rag -w @jaa/profile -w @jaa/ats-adapters",
+    "dev": "npm run build:packages && concurrently -n api,ui -c blue,green \"npm run dev -w @jaa/api\" \"npm run dev -w @jaa/ui\"",
+    "dev:all": "concurrently -n api,ui,runner -c blue,green,yellow \"npm run dev -w @jaa/api\" \"npm run dev -w @jaa/ui\" \"npm run dev -w @jaa/browser-runner\"",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "eslint . --ext .ts,.tsx",
+    "db:migrate": "npm run migrate -w @jaa/storage",
+    "db:seed": "npm run seed -w @jaa/storage",
+    "setup": "npm install && npm run build:packages && npm run db:migrate && npm run db:seed"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "concurrently": "^9.1.0",
+    "eslint": "^9.16.0",
+    "typescript": "^5.7.2"
+  },
+  "overrides": {
+    "esbuild": "^0.25.12",
+    "glob": "^13.0.0"
+  }
+}

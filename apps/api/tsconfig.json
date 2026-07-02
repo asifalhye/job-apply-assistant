@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"],
+  "references": [
+    { "path": "../../packages/storage" },
+    { "path": "../../packages/llm" },
+    { "path": "../../packages/form-engine" },
+    { "path": "../../packages/ats-adapters" },
+    { "path": "../../packages/rag" },
+    { "path": "../../packages/profile" }
+  ]
+}
