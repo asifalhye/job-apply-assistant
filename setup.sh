@@ -51,8 +51,8 @@ if [ ! -f .env ]; then
 fi
 
 echo ""
-echo "Installing Playwright browsers (for form automation)..."
-npx playwright install chromium
+echo "Installing Playwright Chromium (required for Run Application)..."
+npm run playwright:install
 
 echo ""
 echo "=== Setup complete ==="

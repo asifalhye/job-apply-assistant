@@ -31,7 +31,17 @@ function getAdapter(type: string): AtsAdapter {
 
 async function ensureBrowser() {
   if (!browser) {
-    browser = await chromium.launch({ headless: false });
+    try {
+      browser = await chromium.launch({ headless: false });
+    } catch (err) {
+      const message = String(err);
+      if (message.includes("Executable doesn't exist") || message.includes('playwright install')) {
+        throw new Error(
+          'Playwright Chromium is not installed. Stop the app and run: npm run playwright:install — then restart with npm run dev'
+        );
+      }
+      throw err;
+    }
     context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   }
   if (!page && context) {
@@ -40,10 +50,29 @@ async function ensureBrowser() {
 }
 
 export async function registerRunnerRoutes(app: FastifyInstance) {
-  app.post('/runner/start', async (req) => {
+  app.get('/runner/preflight', async () => {
+    try {
+      const executable = chromium.executablePath();
+      return { ready: true, executable };
+    } catch {
+      return {
+        ready: false,
+        fix: 'Run: npm run playwright:install',
+      };
+    }
+  });
+
+  app.post('/runner/start', async (req, reply) => {
     const body = req.body as { jobUrl: string };
-    await ensureBrowser();
-    if (!page) throw new Error('Browser not ready');
+    try {
+      await ensureBrowser();
+    } catch (err) {
+      return reply.status(503).send({
+        error: 'browser_not_installed',
+        message: String(err),
+      });
+    }
+    if (!page) return reply.status(500).send({ error: 'Browser not ready' });
 
     await page.goto(body.jobUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
     const content = await page.content();

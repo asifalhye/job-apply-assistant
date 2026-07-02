@@ -15,7 +15,8 @@
     "lint": "eslint . --ext .ts,.tsx",
     "db:migrate": "npm run migrate -w @jaa/storage",
     "db:seed": "npm run seed -w @jaa/storage",
-    "setup": "npm install && npm run build:packages && npm run db:migrate && npm run db:seed"
+    "setup": "npm install && npm run build:packages && npm run playwright:install && npm run db:migrate && npm run db:seed",
+    "playwright:install": "npm exec --workspace=@jaa/api playwright install chromium"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.18.0",

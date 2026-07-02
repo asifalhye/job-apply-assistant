@@ -26,7 +26,13 @@ export function RunPage() {
   const [message, setMessage] = useState('');
   const [fields, setFields] = useState<Field[]>([]);
 
+  const [browserReady, setBrowserReady] = useState<boolean | null>(null);
+
   useEffect(() => {
+    api.runnerPreflight()
+      .then((r) => setBrowserReady(r.ready))
+      .catch(() => setBrowserReady(false));
+
     const interval = setInterval(() => {
       api.runnerStatus().then(setStatus).catch(() => setStatus({ active: false }));
     }, 3000);
@@ -104,6 +110,13 @@ export function RunPage() {
       <div className="alert alert-warning">
         CAPTCHA, MFA, and bot checks require manual completion. The tool will pause — complete verification in the browser, then continue.
       </div>
+
+      {browserReady === false && (
+        <div className="alert alert-error">
+          Playwright Chromium is not installed. In Terminal, run:{' '}
+          <code>npm run playwright:install</code> — then restart with <code>npm run dev</code>.
+        </div>
+      )}
 
       <div className="card">
         <div style={{ marginBottom: '0.75rem' }}>

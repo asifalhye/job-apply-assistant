@@ -6,8 +6,14 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     ...options,
   });
   if (!res.ok) {
-    const err = await res.text();
-    throw new Error(err || res.statusText);
+    const text = await res.text();
+    try {
+      const json = JSON.parse(text) as { message?: string; error?: string };
+      throw new Error(json.message ?? json.error ?? text);
+    } catch (e) {
+      if (e instanceof Error && e.message !== text) throw e;
+      throw new Error(text || res.statusText);
+    }
   }
   return res.json();
 }
@@ -46,6 +52,7 @@ export const api = {
     request('/llm/generate-answer', { method: 'POST', body: JSON.stringify({ question, jobDescription }) }),
 
   startRunner: (jobUrl: string) => request('/runner/start', { method: 'POST', body: JSON.stringify({ jobUrl }) }),
+  runnerPreflight: () => request<{ ready: boolean; fix?: string; executable?: string }>('/runner/preflight'),
   fillRunner: (fields: Record<string, unknown>[]) => request('/runner/fill', { method: 'POST', body: JSON.stringify({ fields }) }),
   runnerStatus: () => request<{ active: boolean }>('/runner/status'),
   stopRunner: () => request('/runner/stop', { method: 'POST' }),
