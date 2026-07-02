@@ -53,7 +53,7 @@ export function RunPage() {
       };
       setSession(result);
       setFields(result.fields.map((f) => ({ ...f, proposedValue: f.proposedValue ?? '' })));
-      setMessage(`Detected ${result.atsType.toUpperCase()} · ${result.fields.length} fields found. Review values below, then click Fill.`);
+      setMessage(`Detected ${result.atsType.toUpperCase()} · ${result.fields.length} fields found. Review values below, then click Fill.${(result as { hint?: string }).hint ? ` ${(result as { hint?: string }).hint}` : ''}`);
     } catch (e) {
       setMessage(`Error: ${e}`);
     } finally {

@@ -74,7 +74,9 @@ export async function registerRunnerRoutes(app: FastifyInstance) {
     }
     if (!page) return reply.status(500).send({ error: 'Browser not ready' });
 
-    await page.goto(body.jobUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await page.goto(body.jobUrl, { waitUntil: 'networkidle', timeout: 90000 }).catch(async () => {
+      await page!.goto(body.jobUrl, { waitUntil: 'domcontentloaded', timeout: 90000 });
+    });
     const content = await page.content();
     const atsType = detectAtsType(body.jobUrl, content);
     const adapter = getAdapter(atsType);
@@ -128,6 +130,9 @@ export async function registerRunnerRoutes(app: FastifyInstance) {
       jobInfo,
       fields: proposed,
       pageTitle: await page.title(),
+      hint: fields.length === 0
+        ? 'No fields detected. Scroll to the Apply form in the browser, then click Start again.'
+        : undefined,
     };
   });
 
