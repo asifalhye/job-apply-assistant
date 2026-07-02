@@ -36,8 +36,8 @@ export function SettingsPage() {
 
   const exportBackup = async () => {
     try {
-      const result = await api.exportBackup() as { filename: string; recordCounts: Record<string, number> };
-      setMessage(`Backup saved: ${result.filename} (${JSON.stringify(result.recordCounts)})`);
+      const result = await api.exportBackup();
+      setMessage(`Backup saved: ${result.filename}${result.recordCounts ? ` (${JSON.stringify(result.recordCounts)})` : ''}`);
     } catch (e) {
       setMessage(`Export failed: ${e}`);
     }

@@ -60,5 +60,5 @@ export const api = {
   getWorkdayAccounts: () => request<Record<string, unknown>[]>('/workday/accounts'),
   saveWorkdayAccount: (data: Record<string, unknown>) => request('/workday/accounts', { method: 'POST', body: JSON.stringify(data) }),
 
-  exportBackup: () => request<{ filepath: string; filename: string }>('/backup/export'),
+  exportBackup: () => request<{ filepath: string; filename: string; recordCounts?: Record<string, number> }>('/backup/export'),
 };

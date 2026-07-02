@@ -115,7 +115,7 @@ export function SnippetsPage() {
                 <div>
                   <strong>{String(s.title)}</strong>
                   <span className="badge badge-gray" style={{ marginLeft: '0.5rem' }}>{String(s.category)}</span>
-                  {s.sourceType && s.sourceType !== 'user' && (
+                  {typeof s.sourceType === 'string' && s.sourceType !== 'user' && (
                     <span className="badge badge-yellow" style={{ marginLeft: '0.25rem' }}>{String(s.sourceType)}</span>
                   )}
                 </div>
